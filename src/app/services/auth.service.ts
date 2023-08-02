@@ -15,7 +15,7 @@ export class AuthService {
       localStorage.setItem('token', 'true');
 
       if(res.user?.emailVerified == true){
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['dashboard/default']);
       }else{
         this.router.navigate(['/email-verification']);
       }
@@ -64,10 +64,19 @@ export class AuthService {
 
   googleSignIn(){
     return this.fireAuth.signInWithPopup(new GoogleAuthProvider).then(res=>{
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['dashboard/default']);
       localStorage.setItem('token', JSON.stringify(res.user?.uid));
     }, err=>{
       alert(err.message);
     })
+  }
+
+  public isAuthenticated(): boolean{
+    const token = localStorage.getItem('token');
+    if(token!= undefined && token !=""){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

@@ -10,22 +10,20 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
-import { FileManagerComponent } from './components/file-manager/file-manager.component';
+import { ContentLayoutComponent } from './components/content-layout/content-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent,
     ForgotPasswordComponent,
     EmailVerificationComponent,
-    FileManagerComponent
+    ContentLayoutComponent
   ],
   imports: [
     BrowserModule,

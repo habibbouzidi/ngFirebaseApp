@@ -1,0 +1,97 @@
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="/*bg-dark*/ sideNav" style="background-color: #000; background: #000;"
+            [ngClass]="displayMenu? 'col-auto col-md-3 col-xl-2 px-sm-2 px-0':'col-auto px-sm-2 px-0'">
+            <div class="toogle" (click)="toggleMenu()">
+                <i class="bi bi-list"></i>
+            </div>
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a routerLink="/"
+                    class="title d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <!--img class="logo" src="" alt="logo" style="width: 50px;"-->
+                    <span class="fs-5 d-none d-sm-inline" *ngIf="displayMenu == true"> NG FireBase Admin</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item" *ngFor="let item of menu;">
+                        <a class="nav-link align-middle px-0" *ngIf="item.type==='link'" [routerLink]="item.path"
+                            routerLinkActive="active" (click)="generateBreadcumb(item)">
+                            <i class="bi {{item.icon}}"></i>
+                            <span class="ms-1 d-none d-sm-inline" *ngIf="displayMenu == true">{{item.title}}</span>
+                            <span class="widgetMenu" *ngIf="!displayMenu">{{item.title}}</span>
+                        </a>
+                        <a class="nav-link align-middle px-0" *ngIf="item.type==='sub'" href="javascript:void(0)"
+                            (click)="toggleNav(item)">
+                            <i class="bi {{item.icon}}"></i>
+                            <span class="ms-1 d-none d-sm-inline" *ngIf="displayMenu == true">{{item.title}}</span>
+                            <span class="widgetMenu" *ngIf="!displayMenu">{{item.title}}</span>
+                        </a>
+                        <ul class="collapse show nav flex-column ms-1" *ngIf="item.type==='sub' && item.active == true"
+                            id="submenu1" data-bs-parent="#menu">
+                            <li class="w-100" *ngFor="let sItem of item.children;">
+                                <a *ngIf="sItem.type==='link'" [routerLink]="sItem.path" routerLinkActive="active"
+                                    class="nav-link px-0" (click)="generateBreadcumb(item, sItem)">
+                                    <i class="bi {{sItem.icon}}"></i>
+                                    <span class="ms-1 d-none d-sm-inline"
+                                        *ngIf="displayMenu == true">{{sItem.title}}</span>
+                                    <span class="widgetMenuItem" *ngIf="!displayMenu">{{sItem.title}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <hr>
+                <div class="dropdown pb-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../../../assets/img/user.png" alt="hugenerd" width="30" height="30"
+                            class="rounded-circle">
+                        <!--span class="d-none d-sm-inline mx-1" *ngIf="displayMenu == true">{{admin.firstname}}
+                            {{admin.lastname}}</span-->
+                        <span class="d-none d-sm-inline mx-1" *ngIf="displayMenu == true">Admin</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" href="javascript:void(0)" (click)="logout()">Déconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col py-3 mainPanel">
+            <div class="row breadcumb">
+                <div class="col-12">
+                    <div class="container">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb p-3 bg-body-tertiary rounded-3">
+                                <li class="breadcrumb-item">
+                                    <a class="link-body-emphasis" routerLink="/">
+                                        <i class="bi bi-house-door"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item" *ngIf="nav.path ==''">
+                                    <a class="link-body-emphasis fw-semibold text-decoration-none"
+                                        href="javascript:void(0)">{{nav.title}}</a>
+                                </li>
+                                <li class="breadcrumb-item" *ngIf="nav.path !=''">
+                                    <a class="link-body-emphasis fw-semibold text-decoration-none"
+                                        routerLink="{{nav.path}}">{{nav.title}}</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page" *ngIf="nav2 !=''">
+                                    {{nav2}}
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="row main">
+                <div class="col-12">
+                    <router-outlet #o="outlet"></router-outlet>
+                </div>
+            </div>
+            <div class="row footer">
+                <div class="col-12">
+                    <span>Copyright © 2023. Tous droits réservés par Habib Bouzidi</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

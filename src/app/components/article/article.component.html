@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="header">
+                    <h3>Liste des articles</h3>
+                    <button class="btn btn-light addButton" (click)="newArticle()">
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Technologies</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let article of articles; index as i">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{article.title}}</td>
+                            <td>{{article.description}}</td>
+                            <td>{{article.technologies}}</td>
+                            <td>
+                                <a type="button" class="btn btn-outline-info" (click)="editArticle(article)"><i class="bi bi-pencil-square"></i></a>
+                                <a type="button" class="btn btn-outline-danger ms-2" (click)="deleteArticle(article)"><i class="bi bi-trash3"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4" *ngIf="article">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h4 class="text-dark text-muted">Article Infos</h4>
+                        </div>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Title..." [(ngModel)]="article.title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="subtitle" class="form-label">Subtitle</label>
+                            <input type="text" class="form-control" id="subtitle" placeholder="Subtitle..." [(ngModel)]="article.subtitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="bases" class="form-label">Bases</label>
+                            <input type="text" class="form-control" id="bases" placeholder="Bases..." [(ngModel)]="article.bases">
+                        </div>
+                        <div class="mb-3">
+                            <label for="frontImage" class="form-label">Image Link</label>
+                            <input type="text" class="form-control" id="frontImage" placeholder="Image Link..." [(ngModel)]="article.frontImage">
+                        </div>
+                        <div class="mb-3">
+                            <label for="stackLink" class="form-label">Stack Link</label>
+                            <input type="text" class="form-control" id="stackLink" placeholder="Stack Link..." [(ngModel)]="article.stackLink">
+                        </div>
+                        <div class="mb-3">
+                            <label for="shortDescription" class="form-label">Short Description</label>
+                            <input type="text" class="form-control" id="shortDescription" placeholder="Short Description..." [(ngModel)]="article.shortDescription">
+                        </div>
+                        <div class="mb-3">
+                            <label for="technologies" class="form-label">Technologies</label>
+                            <input type="text" class="form-control" id="technologies" placeholder="Technologies..." [(ngModel)]="article.technologies">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Long Description</label>
+                            <textarea class="form-control" id="description" rows="3" [(ngModel)]="article.description"></textarea>
+                        </div>
+                        <div class="saveButton">
+                            <button class="btn btn-success" (click)="saveArticle()">save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
