@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mt-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Enter your match games and click save button</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="games" class="form-label">
+                            Match Games <span class="text text-secondary"> Split games match by comma(,)</span>
+                        </label>
+                        <textarea class="form-control" id="games" rows="3" [(ngModel)]="games"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="technologies" class="form-label">
+                            Tips <span class="text text-secondary"> Split Tips by comma(,)</span>
+                        </label>
+                        <input type="text" class="form-control" id="tips" placeholder="Tips1, tips2,..." [(ngModel)]="tips">
+                    </div>
+                    <div class="saveButton">
+                        <button class="btn btn-success" (click)="saveGamesTips()">save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="header">
+                <h3>Betting Tips Predictions</h3>
+                <button class="btn btn-secondary addButton" (click)="generatePredictions()">
+                    <i class="bi bi-building-gear"></i> Generate
+                </button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Coupon ID</th>
+                        <th scope="col">Match game</th>
+                        <th scope="col">Tips</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pred of predictions;">
+                        <td>{{pred.coupon}}</td>
+                        <td>{{pred.match}}</td>
+                        <td>{{pred.tips}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="saveButton" *ngIf="predictions.length > 0">
+                <button class="btn btn-warning" (click)="shuffleGames()">
+                    <i class="bi bi-shuffle"></i> Shuffle Games
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
